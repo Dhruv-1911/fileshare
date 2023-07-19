@@ -13,7 +13,7 @@ const storage = multer.diskStorage({
     destination: function (req, res, cb) {
         cb(null, "./uploads")
     }, filename: function (req, file, cb) {
-        console.log(file);
+        
         cb(null, `${file.originalname.split(".")[0]}_${Date.now()}${path.extname(file.originalname)}`);
     }
 });
@@ -75,7 +75,7 @@ router.post('/send', async (req, res) => {
     }).then(() => {
             return res.json({ success: true });
         }).catch((err) => {
-            console.log(err);
+            
             return res.status(500).json({ error: 'Error in email sending.' });
         })
     })
