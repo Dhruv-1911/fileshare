@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const connect_db =mongoose.connect('mongodb://localhost:27017/fileShare')
+const connect_db =mongoose.connect(process.env.DB_URL)
     .then(() => {
         console.log("Connect to Databse..")
     })
