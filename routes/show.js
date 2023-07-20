@@ -2,6 +2,12 @@ require('dotenv').config();
 const router = require("express").Router()
 const File = require('../model/file')
 
+  /**
+   * @function upload_file
+   * @description This method render download page 
+   * @author Dhruv K
+   */
+  
 router.get("/:uuid", async (req,res)=>{
     try {
         const file = await File.findOne({uuid:req.params.uuid});

@@ -18,6 +18,11 @@ const storage = multer.diskStorage({
     }
 });
 
+  /**
+   * @function upload_file
+   * @description This method upload file in db 
+   * @author Dhruv K
+   */
 const upload = multer({
     storage,
     limit: { filesize: 1000000 * 10 }
@@ -44,6 +49,11 @@ router.post('/', (req, res) => {
     })
 });
 
+  /**
+   * @function send_email
+   * @description This method send file to the other email address
+   * @author Dhruv K
+   */
 router.post('/send', async (req, res) => {
     //validate req
     const { uuid, To, from } = req.body
