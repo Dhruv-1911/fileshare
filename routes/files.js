@@ -30,23 +30,29 @@ const upload = multer({
 
 router.post('/', (req, res) => {
 
-    //store file
-    upload(req, res, async (err) => {
-        //check send file is validate request or not
-        if (!req.file) {
-            return res.json({ error: "all fields are required" })
-        }
-
-        const file = new File({
-            filename: req.file.filename,
-            uuid: uuid4(),
-            size: req.file.size,
-            path: req.file.path
+    try {
+        //store file
+        upload(req, res, async (err) => {
+            //check send file is validate request or not
+            if (!req.file) {
+                return res.json({ error: "all fields are required" })
+            }
+    
+            const file = new File({
+                filename: req.file.filename,
+                uuid: uuid4(),
+                size: req.file.size,
+                path: req.file.path
+            })
+    
+            const response = await file.save();
+            return res.json({ files: `${process.env.URL}/files/${response.uuid}` })
         })
-
-        const response = await file.save();
-        return res.json({ files: `${process.env.URL}/files/${response.uuid}` })
-    })
+        
+    } catch (error) {
+        console.log('error: ', error);
+        
+    }
 });
 
   /**
