@@ -11,7 +11,7 @@ const { log } = require('console');
 //multer use for upload file
 const storage = multer.diskStorage({
     destination: function (req, res, cb) {
-        cb(null, "./uploads")
+        cb(null, "../src/uploads")
     }, filename: function (req, file, cb) {
         
         cb(null, `${file.originalname.split(".")[0]}_${Date.now()}${path.extname(file.originalname)}`);
