@@ -25,7 +25,7 @@ const storage = multer.diskStorage({
    */
 const upload = multer({
     storage,
-    limit: { filesize: 1000000 * 10 }
+    limit: { filesize: 1000000 * 10000 } //10 gb file
 }).single("myfile");
 
 router.post('/', (req, res) => {
@@ -36,6 +36,9 @@ router.post('/', (req, res) => {
             //check send file is validate request or not
             if (!req.file) {
                 return res.json({ error: "all fields are required" })
+            }
+            if(err){
+                return res.status(500).json({message:err.message})
             }
     
             const file = new File({
